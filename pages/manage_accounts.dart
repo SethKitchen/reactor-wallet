@@ -7,7 +7,12 @@ import 'package:sethkitchen/wallet/dialogs/remove_account.dart';
 import 'package:sethkitchen/wallet/utils/states.dart';
 
 class ManageAccountsPage extends StatefulWidget {
-  const ManageAccountsPage({Key? key}) : super(key: key);
+  final String name;
+  final String path;
+
+  const ManageAccountsPage(
+      {required key, required this.name, required this.path})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ManageAccountsPageState();
@@ -23,7 +28,7 @@ class ManageAccountsPageState extends State<ManageAccountsPage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.person_add_alt_1_outlined, color: Colors.white),
         onPressed: () {
-          Navigator.pushNamed(context, "/account_selection");
+          Navigator.pushNamed(context, "/wallet/account/select");
         },
       ),
       body: ResponsiveSizer(

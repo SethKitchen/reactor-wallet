@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sethkitchen/Pages/base_page.dart';
 import 'package:sethkitchen/wallet/components/size_wrapper.dart';
 import 'package:sethkitchen/wallet/dialogs/insufficient_funds.dart';
 import 'package:sethkitchen/wallet/dialogs/select_account.dart';
@@ -18,8 +19,12 @@ import 'package:uni_links/uni_links.dart';
 /*
  * Home Page
  */
-class HomePage extends HookConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+class WalletHomePage extends HookConsumerWidget {
+  final String name;
+  final String path;
+
+  const WalletHomePage({required key, required this.name, required this.path})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +46,7 @@ class HomePage extends HookConsumerWidget {
         break;
 
       default:
-        page = const AccountSubPage("/home");
+        page = const AccountSubPage("/wallet");
     }
 
     useEffect(() {
@@ -92,8 +97,8 @@ class HomePage extends HookConsumerWidget {
             currentPage.value = page;
           },
           elevation: 0,
-          showUnselectedLabels:
-              Platform.isWindows | Platform.isMacOS | Platform.isLinux,
+          /*showUnselectedLabels:
+              Platform.isWindows | Platform.isMacOS | Platform.isLinux,*/
           currentIndex: currentPage.value,
           type: BottomNavigationBarType.fixed,
           items: const [

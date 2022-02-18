@@ -45,77 +45,74 @@ class SideBar extends HookConsumerWidget {
             ),
           ],
         ),
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Expanded(
-              child: ListView(
-                controller: listController,
-                children: accounts.map((Account account) {
-                  IconData icon = account.accountType == AccountType.Wallet
-                      ? Icons.account_balance_wallet_outlined
-                      : Icons.person_pin_outlined;
-                  return SizedBox(
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(5),
-                      splashColor: Theme.of(context).primaryColorLight,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Icon(
-                              icon,
-                              color: Colors.white,
-                            ),
+        child: Flex(direction: Axis.vertical, children: [
+          Expanded(
+            child: ListView(
+              controller: listController,
+              children: accounts.map((Account account) {
+                IconData icon = account.accountType == AccountType.Wallet
+                    ? Icons.account_balance_wallet_outlined
+                    : Icons.person_pin_outlined;
+                return SizedBox(
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(5),
+                    splashColor: Theme.of(context).primaryColorLight,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Icon(
+                            icon,
+                            color: Colors.white,
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: selectedAccount == account
-                                  ? Theme.of(context).selectedTextColor
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Text(
-                              account.name,
-                              style: const TextStyle(color: Colors.white),
-                            ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: selectedAccount == account
+                                ? Theme.of(context).selectedTextColor
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                        ],
-                      ),
-                      onTap: () {
-                        ref.read(selectedAccountProvider.notifier).state =
-                            account;
-                      },
+                          child: Text(
+                            account.name,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
-                    height: 80,
-                  );
-                }).toList(),
-              ),
+                    onTap: () {
+                      ref.read(selectedAccountProvider.notifier).state =
+                          account;
+                    },
+                  ),
+                  height: 80,
+                );
+              }).toList(),
             ),
-            if (Platform.isWindows) ...[
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: MaterialButton(
-                  height: 50,
-                  shape: const CircleBorder(),
-                  onPressed: () {
-                    // Refresh the account when pulling down
-                    final accountsProv = ref.read(accountsProvider.notifier);
-                    final selectedAccount = ref.read(selectedAccountProvider);
-                    if (selectedAccount != null) {
-                      accountsProv.refreshAccount(selectedAccount.name);
-                    }
-                  },
-                  child:
-                      const Icon(Icons.refresh_outlined, color: Colors.white),
-                ),
-              )
-            ]
-          ],
-        ),
+          ),
+          //if (Platform.isWindows) ...[
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: MaterialButton(
+              height: 50,
+              shape: const CircleBorder(),
+              onPressed: () {
+                // Refresh the account when pulling down
+                final accountsProv = ref.read(accountsProvider.notifier);
+                final selectedAccount = ref.read(selectedAccountProvider);
+                if (selectedAccount != null) {
+                  accountsProv.refreshAccount(selectedAccount.name);
+                }
+              },
+              child: const Icon(Icons.refresh_outlined, color: Colors.white),
+            ),
+          )
+        ]
+            //],
+            ),
       ),
     );
   }
@@ -143,7 +140,7 @@ class AccountSubPage extends ConsumerWidget {
     // If the account is loaded and no account is found then open the Account Selection page in order to create an account
     if (isAppLoaded && selectedAccount == null) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, "/account_selection");
+        Navigator.pushReplacementNamed(context, "/wallet/account/select");
       });
     }
 
@@ -151,7 +148,7 @@ class AccountSubPage extends ConsumerWidget {
       accountHeader = InkWell(
         borderRadius: BorderRadius.circular(5),
         // Disable ripple effect on Windows
-        onTap: Platform.isWindows ? null : () {},
+        onTap: /* Platform.isWindows ? null :*/ () {},
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: DropdownButton<Account>(
@@ -266,22 +263,22 @@ class AccountSubPage extends ConsumerWidget {
           ? AppBar(
               title: accountHeader,
               toolbarHeight: kToolbarHeight + 10,
-              actions: Platform.isWindows
-                  ? [
-                      IconButton(
-                        onPressed: () async {
-                          if (selectedAccount != null) {
-                            final accountsProv =
-                                ref.read(accountsProvider.notifier);
-                            await accountsProv
-                                .refreshAccount(selectedAccount.name);
-                          }
-                        },
-                        icon: const Icon(Icons.refresh_outlined),
-                      )
-                    ]
-                  : null,
-            )
+              actions: /*Platform.isWindows
+                  ? */
+                  [
+                  IconButton(
+                    onPressed: () async {
+                      if (selectedAccount != null) {
+                        final accountsProv =
+                            ref.read(accountsProvider.notifier);
+                        await accountsProv.refreshAccount(selectedAccount.name);
+                      }
+                    },
+                    icon: const Icon(Icons.refresh_outlined),
+                  )
+                ]
+              //: null,
+              )
           : null,
       floatingActionButton: selectedAccount is WalletAccount
           ? FloatingActionButton(

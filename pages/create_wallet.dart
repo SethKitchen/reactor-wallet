@@ -9,7 +9,11 @@ import 'package:sethkitchen/wallet/utils/states.dart';
  * Getting Started Page
  */
 class CreateWallet extends ConsumerStatefulWidget {
-  const CreateWallet({Key? key}) : super(key: key);
+  final String name;
+  final String path;
+
+  const CreateWallet({required key, required this.name, required this.path})
+      : super(key: key);
 
   @override
   CreateWalletState createState() => CreateWalletState();
@@ -103,7 +107,7 @@ class CreateWalletState extends ConsumerState<CreateWallet> {
         await accountsProv.createWallet(accountName, networkURL);
 
         // Go to Home page
-        Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
+        Navigator.pushNamedAndRemoveUntil(context, "/wallet", (_) => false);
       } catch (err) {
         errorMessage(
           context,

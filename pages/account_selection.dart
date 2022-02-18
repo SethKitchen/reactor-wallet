@@ -5,7 +5,12 @@ import 'package:sethkitchen/wallet/components/size_wrapper.dart';
  * Account Selection Page
  */
 class AccountSelectionPage extends StatelessWidget {
-  const AccountSelectionPage({Key? key}) : super(key: key);
+  final String name;
+  final String path;
+
+  const AccountSelectionPage(
+      {required key, required this.name, required this.path})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class AccountSelectionPage extends StatelessWidget {
                     child: InkWell(
                       splashColor: Theme.of(context).hoverColor,
                       onTap: () async {
-                        Navigator.pushNamed(context, "/watch_address");
+                        Navigator.pushNamed(context, "/wallet/watch/address");
                       },
                       child: Flex(
                         direction: Axis.horizontal,
@@ -52,7 +57,7 @@ class AccountSelectionPage extends StatelessWidget {
                     child: InkWell(
                       splashColor: Theme.of(context).hoverColor,
                       onTap: () async {
-                        Navigator.pushNamed(context, "/import_wallet");
+                        Navigator.pushNamed(context, "/wallet/import");
                       },
                       child: Flex(
                         direction: Axis.horizontal,
@@ -78,7 +83,7 @@ class AccountSelectionPage extends StatelessWidget {
                     child: InkWell(
                       splashColor: Theme.of(context).hoverColor,
                       onTap: () async {
-                        Navigator.pushNamed(context, "/create_wallet");
+                        Navigator.pushNamed(context, "/wallet/create");
                       },
                       child: Flex(
                         direction: Axis.horizontal,

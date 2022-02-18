@@ -8,7 +8,11 @@ import 'package:sethkitchen/wallet/utils/states.dart';
  * Getting Started Page
  */
 class ImportWallet extends ConsumerStatefulWidget {
-  const ImportWallet({Key? key}) : super(key: key);
+  final String name;
+  final String path;
+
+  const ImportWallet({required key, required this.name, required this.path})
+      : super(key: key);
 
   @override
   ImportWalletState createState() => ImportWalletState();
@@ -124,7 +128,7 @@ class ImportWalletState extends ConsumerState<ImportWallet> {
         .importWallet(mnemonic, networkURL, accountName)
         .then((account) {
       ref.read(selectedAccountProvider.notifier).state = account;
-      Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
+      Navigator.pushNamedAndRemoveUntil(context, "/wallet", (_) => false);
     });
   }
 }

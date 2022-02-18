@@ -8,7 +8,11 @@ import 'package:sethkitchen/wallet/utils/states.dart';
  * Getting Started Page
  */
 class WatchAddress extends ConsumerStatefulWidget {
-  const WatchAddress({Key? key}) : super(key: key);
+  final String name;
+  final String path;
+
+  const WatchAddress({required key, required this.name, required this.path})
+      : super(key: key);
 
   @override
   WatchAddressState createState() => WatchAddressState();
@@ -126,7 +130,7 @@ class WatchAddressState extends ConsumerState<WatchAddress> {
         .createWatcher(address, networkURL, accountName)
         .then((account) {
       ref.read(selectedAccountProvider.notifier).state = account;
-      Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
+      Navigator.pushNamedAndRemoveUntil(context, "/wallet", (_) => false);
     });
   }
 }

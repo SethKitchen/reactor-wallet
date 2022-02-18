@@ -72,29 +72,29 @@ Future<void> selectTransactionMethod(
           child: Flex(
             direction: Axis.vertical,
             children: [
-              if (!Platform.isWindows) ...[
-                Expanded(
-                  child: Card(
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(5),
-                      onTap: solanaPaySelected,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.only(right: 7),
-                              child: Icon(Icons.qr_code_2_outlined),
-                            ),
-                            Text("Solana Pay QR"),
-                          ],
-                        ),
+              //if (!Platform.isWindows) ...[
+              Expanded(
+                child: Card(
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(5),
+                    onTap: solanaPaySelected,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(right: 7),
+                            child: Icon(Icons.qr_code_2_outlined),
+                          ),
+                          Text("Solana Pay QR"),
+                        ],
                       ),
                     ),
                   ),
-                )
-              ],
+                ),
+              ),
+              // ],
               Expanded(
                 child: Card(
                   child: InkWell(

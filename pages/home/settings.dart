@@ -37,7 +37,7 @@ class SettingsSubPageState extends ConsumerState<SettingsSubPage> {
           children: [
             ClickableCard(
               onTap: () async {
-                Navigator.pushNamed(context, "/manage_accounts");
+                Navigator.pushNamed(context, "/wallet/manage/account");
               },
               child: ListTile(
                 title: const Text('Manage Accounts'),
