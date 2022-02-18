@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/clickable_card.dart';
-import 'package:reactor_wallet/components/size_wrapper.dart';
-import 'package:reactor_wallet/utils/states.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/components/clickable_card.dart';
+import 'package:sethkitchen/wallet/components/size_wrapper.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsSubPage extends ConsumerStatefulWidget {
@@ -49,7 +49,8 @@ class SettingsSubPageState extends ConsumerState<SettingsSubPage> {
             ),
             Consumer(builder: (context, ref, _) {
               ref.watch(settingsProvider);
-              ThemeType selectedTheme = ref.read(settingsProvider.notifier).getTheme();
+              ThemeType selectedTheme =
+                  ref.read(settingsProvider.notifier).getTheme();
               return ClickableCard(
                 onTap: () {
                   enableDarkTheme(selectedTheme == ThemeType.light);
@@ -77,7 +78,8 @@ class SettingsSubPageState extends ConsumerState<SettingsSubPage> {
             ),
             ClickableCard(
               onTap: () async {
-                openURL('https://github.com/marc2332/reactor-wallet#-support-this-project');
+                openURL(
+                    'https://github.com/marc2332/reactor-wallet#-support-this-project');
               },
               child: ListTile(
                 title: const Text('Donate'),

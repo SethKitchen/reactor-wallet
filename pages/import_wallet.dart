@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/components/size_wrapper.dart';
-import 'package:reactor_wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/components/size_wrapper.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
 
 /*
  * Getting Started Page
@@ -40,7 +40,8 @@ class ImportWalletState extends ConsumerState<ImportWallet> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text("You can name it as you wish, or change it later"),
+                      child: Text(
+                          "You can name it as you wish, or change it later"),
                     ),
                     TextFormField(
                       initialValue: accountName,
@@ -119,7 +120,9 @@ class ImportWalletState extends ConsumerState<ImportWallet> {
     final accountsProv = ref.read(accountsProvider.notifier);
 
     // Create the account
-    accountsProv.importWallet(mnemonic, networkURL, accountName).then((account) {
+    accountsProv
+        .importWallet(mnemonic, networkURL, accountName)
+        .then((account) {
       ref.read(selectedAccountProvider.notifier).state = account;
       Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
     });

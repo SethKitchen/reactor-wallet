@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/dialogs/confirm_transaction.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
+import 'package:sethkitchen/wallet/dialogs/confirm_transaction.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/wallet_account.dart';
 import 'package:solana/solana.dart';
 
 String? transactionAddressValidator(String? value) {
@@ -66,8 +65,10 @@ Future<void> makePaymentManuallyDialog(
           final destination = useState(initialDestination);
           final sendAmount = useState(initialSendAmount);
 
-          bool addressIsOk = transactionAddressValidator(destination.value) == null;
-          bool amountIsOK = transactionAmountValidator(sendAmount.value.toString()) == null;
+          bool addressIsOk =
+              transactionAddressValidator(destination.value) == null;
+          bool amountIsOK =
+              transactionAmountValidator(sendAmount.value.toString()) == null;
 
           Future<void> confirmTransaction() async {
             // Only let  it be sent if the address and the ammount is OK
@@ -114,7 +115,8 @@ Future<void> makePaymentManuallyDialog(
                     items: tokens.map((Token token) {
                       return DropdownMenuItem<String>(
                         value: token.info.symbol,
-                        child: Text(token.info.symbol + (token is NFT ? ' - NFT' : '')),
+                        child: Text(
+                            token.info.symbol + (token is NFT ? ' - NFT' : '')),
                       );
                     }).toList(),
                   ),
@@ -164,7 +166,8 @@ Future<void> makePaymentManuallyDialog(
               ),
               TextButton(
                 child: const Text('Continue'),
-                onPressed: addressIsOk && amountIsOK ? confirmTransaction : null,
+                onPressed:
+                    addressIsOk && amountIsOK ? confirmTransaction : null,
               ),
             ],
           );

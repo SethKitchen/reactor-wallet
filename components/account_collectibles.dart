@@ -1,15 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/clickable_card.dart';
-import 'package:reactor_wallet/pages/collectible_info.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/components/clickable_card.dart';
+import 'package:sethkitchen/wallet/pages/collectible_info.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
 
 class AccountCollectibles extends ConsumerWidget {
   final Account account;
 
-  const AccountCollectibles({Key? key, required this.account}) : super(key: key);
+  const AccountCollectibles({Key? key, required this.account})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,7 +35,8 @@ class AccountCollectibles extends ConsumerWidget {
                 )
               : GridView.count(
                   crossAxisCount: columnsNumber,
-                  physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                  physics: const AlwaysScrollableScrollPhysics(
+                      parent: BouncingScrollPhysics()),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   children: collectibles.map(
                     (nft) {
@@ -51,7 +53,8 @@ class AccountCollectibles extends ConsumerWidget {
                                 width: 120,
                                 imageUrl: nft.imageInfo!.uri,
                                 errorWidget: (context, url, error) =>
-                                    const Icon(Icons.image_not_supported_rounded),
+                                    const Icon(
+                                        Icons.image_not_supported_rounded),
                               ),
                             ),
                             onTap: () {
@@ -96,7 +99,9 @@ class AccountCollectibles extends ConsumerWidget {
                               }
                             },
                           ),
-                          Text(name.length > 18 ? '${name.substring(0, 16)}...' : name),
+                          Text(name.length > 18
+                              ? '${name.substring(0, 16)}...'
+                              : name),
                         ],
                       );
                     },

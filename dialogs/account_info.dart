@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/utils/wallet_account.dart';
 
 Future<void> accountInfoDialog(context, Account account) async {
   String shortAddress = account.address.substring(0, 13);
   NetworkUrl network = account.url;
-  String accountType = account.accountType == AccountType.Client ? 'Client' : 'Wallet';
+  String accountType =
+      account.accountType == AccountType.Client ? 'Client' : 'Wallet';
 
   return showDialog<void>(
     context: context,
@@ -23,7 +24,8 @@ Future<void> accountInfoDialog(context, Account account) async {
                 title: const Text('Address'),
                 subtitle: Text('$shortAddress...'),
                 trailing: IconButton(
-                  icon: Icon(Icons.copy_all_outlined, color: Theme.of(context).iconColor),
+                  icon: Icon(Icons.copy_all_outlined,
+                      color: Theme.of(context).iconColor),
                   onPressed: () {
                     Clipboard.setData(
                       ClipboardData(text: account.address),
@@ -52,7 +54,8 @@ Future<void> accountInfoDialog(context, Account account) async {
                   title: const Text('Seedphrase'),
                   subtitle: const Text('Hidden'),
                   trailing: IconButton(
-                    icon: Icon(Icons.copy_all_outlined, color: Theme.of(context).iconColor),
+                    icon: Icon(Icons.copy_all_outlined,
+                        color: Theme.of(context).iconColor),
                     onPressed: () {
                       WalletAccount walletAccount = account as WalletAccount;
 

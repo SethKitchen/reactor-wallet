@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/components/size_wrapper.dart';
-import 'package:reactor_wallet/dialogs/error_popup.dart';
-import 'package:reactor_wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/components/size_wrapper.dart';
+import 'package:sethkitchen/wallet/dialogs/error_popup.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
 
 /*
  * Getting Started Page
@@ -43,7 +43,8 @@ class CreateWalletState extends ConsumerState<CreateWallet> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text("Think a name, don't worry, you can change it later."),
+                      child: Text(
+                          "Think a name, don't worry, you can change it later."),
                     ),
                     TextFormField(
                       initialValue: accountName,

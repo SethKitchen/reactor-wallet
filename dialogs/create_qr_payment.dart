@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:reactor_wallet/components/numpad.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/solana_pay.dart';
-import 'package:reactor_wallet/utils/states.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
+import 'package:sethkitchen/wallet/components/numpad.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/solana_pay.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
 import 'package:solana/dto.dart' show Commitment;
 import 'package:solana/solana.dart' show Ed25519HDKeyPair, SubscriptionClient;
 
@@ -80,7 +79,9 @@ Future<void> createQRTransaction(BuildContext context, Account account) async {
             transactionData.value = TransactionSolanaPay(
               recipient: account.address,
               amount: sendAmount,
-              splToken: selectedToken.value.info.symbol != "SOL" ? selectedToken.value.mint : null,
+              splToken: selectedToken.value.info.symbol != "SOL"
+                  ? selectedToken.value.mint
+                  : null,
               references: [transactionIdentifier.address],
             );
 
@@ -94,7 +95,8 @@ Future<void> createQRTransaction(BuildContext context, Account account) async {
                 commitment: Commitment.confirmed,
               );
             } else {
-              final programAccount = await account.client.getAssociatedTokenAccount(
+              final programAccount =
+                  await account.client.getAssociatedTokenAccount(
                 owner: account.address,
                 mint: selectedToken.value.mint,
               );
@@ -106,7 +108,8 @@ Future<void> createQRTransaction(BuildContext context, Account account) async {
             }
 
             stream.forEach((newAccount) async {
-              final sigs = await account.client.rpcClient.getSignaturesForAddress(
+              final sigs =
+                  await account.client.rpcClient.getSignaturesForAddress(
                 transactionIdentifier.address,
                 commitment: Commitment.confirmed,
               );
@@ -136,7 +139,8 @@ Future<void> createQRTransaction(BuildContext context, Account account) async {
             // Remove the last character
             if (n == "D") {
               if (currentValue.isNotEmpty) {
-                amount.value = amount.value.substring(0, currentValue.length - 1);
+                amount.value =
+                    amount.value.substring(0, currentValue.length - 1);
               }
               return;
             }
@@ -210,7 +214,8 @@ Future<void> createQRTransaction(BuildContext context, Account account) async {
                             ],
                             Padding(
                               padding: screenSize.width > 700
-                                  ? const EdgeInsets.only(left: 25, right: 25, top: 15)
+                                  ? const EdgeInsets.only(
+                                      left: 25, right: 25, top: 15)
                                   : EdgeInsets.zero,
                               child: SizedBox(
                                 height: screenSize.width > 700 ? 225 : 150,
@@ -238,7 +243,8 @@ Future<void> createQRTransaction(BuildContext context, Account account) async {
                                       ? [
                                           const Padding(
                                             padding: EdgeInsets.only(right: 7),
-                                            child: Icon(Icons.error_outline_outlined),
+                                            child: Icon(
+                                                Icons.error_outline_outlined),
                                           ),
                                           Text(errorMessage.value.toString())
                                         ]

@@ -2,19 +2,19 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/account_home.dart';
-import 'package:reactor_wallet/components/accounts_transaction.dart';
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/components/size_wrapper.dart';
-import 'package:reactor_wallet/dialogs/select_transaction_method.dart';
-import 'package:reactor_wallet/components/account_collectibles.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/client_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
+import 'package:sethkitchen/wallet/components/account_home.dart';
+import 'package:sethkitchen/wallet/components/accounts_transaction.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/components/size_wrapper.dart';
+import 'package:sethkitchen/wallet/dialogs/select_transaction_method.dart';
+import 'package:sethkitchen/wallet/components/account_collectibles.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/client_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/utils/wallet_account.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
 
 /*
  * Sidebar - alternative to appbar on Desktop
@@ -70,7 +70,8 @@ class SideBar extends HookConsumerWidget {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 3),
                             decoration: BoxDecoration(
                               color: selectedAccount == account
                                   ? Theme.of(context).selectedTextColor
@@ -85,7 +86,8 @@ class SideBar extends HookConsumerWidget {
                         ],
                       ),
                       onTap: () {
-                        ref.read(selectedAccountProvider.notifier).state = account;
+                        ref.read(selectedAccountProvider.notifier).state =
+                            account;
                       },
                     ),
                     height: 80,
@@ -107,7 +109,8 @@ class SideBar extends HookConsumerWidget {
                       accountsProv.refreshAccount(selectedAccount.name);
                     }
                   },
-                  child: const Icon(Icons.refresh_outlined, color: Colors.white),
+                  child:
+                      const Icon(Icons.refresh_outlined, color: Colors.white),
                 ),
               )
             ]
@@ -246,7 +249,8 @@ class AccountSubPage extends ConsumerWidget {
           break;
       }
     } else {
-      final sampleAccount = ClientAccount("_____", 0, "_____", NetworkUrl("", ""), tokensTracker);
+      final sampleAccount =
+          ClientAccount("_____", 0, "_____", NetworkUrl("", ""), tokensTracker);
 
       sampleAccount.isLoaded = false;
 
@@ -267,8 +271,10 @@ class AccountSubPage extends ConsumerWidget {
                       IconButton(
                         onPressed: () async {
                           if (selectedAccount != null) {
-                            final accountsProv = ref.read(accountsProvider.notifier);
-                            await accountsProv.refreshAccount(selectedAccount.name);
+                            final accountsProv =
+                                ref.read(accountsProvider.notifier);
+                            await accountsProv
+                                .refreshAccount(selectedAccount.name);
                           }
                         },
                         icon: const Icon(Icons.refresh_outlined),

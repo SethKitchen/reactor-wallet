@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
 
 Future<void> paymentInfo(
   BuildContext context,
@@ -25,7 +25,8 @@ Future<void> paymentInfo(
                 subtitle: Text('${transaction.ammount.toStringAsFixed(9)} SOL'),
               ),
               ListTile(
-                title: toMe ? const Text('Received from') : const Text('Sent to'),
+                title:
+                    toMe ? const Text('Received from') : const Text('Sent to'),
                 subtitle: Text('$involvedAddressShort...'),
                 trailing: IconButton(
                   icon: Icon(

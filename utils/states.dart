@@ -1,10 +1,10 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/client_account.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/client_account.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/utils/wallet_account.dart';
 
 final appLoadedProvider = StateProvider<bool>((_) {
   return false;
@@ -15,7 +15,8 @@ enum ThemeType {
   dark,
 }
 
-final settingsProvider = StateNotifierProvider<SettingsManager, Map<String, dynamic>>((ref) {
+final settingsProvider =
+    StateNotifierProvider<SettingsManager, Map<String, dynamic>>((ref) {
   return SettingsManager(ref);
 });
 
@@ -27,7 +28,8 @@ final tokensTrackerProvider = Provider<TokenTrackers>((_) {
   return TokenTrackers();
 });
 
-final accountsProvider = StateNotifierProvider<AccountsManager, Map<String, Account>>((ref) {
+final accountsProvider =
+    StateNotifierProvider<AccountsManager, Map<String, Account>>((ref) {
   TokenTrackers tokensTracker = ref.read(tokensTrackerProvider);
   return AccountsManager(tokensTracker, ref);
 });
@@ -95,9 +97,10 @@ Future<void> loadState(TokenTrackers tokensTracker, WidgetRef ref) async {
 
   // Map the saved accounts to instances
   Map<String, Account> accountsState = jsonAccounts.map((accountName, account) {
-    AccountType accountType = account["accountType"] == AccountType.Client.toString()
-        ? AccountType.Client
-        : AccountType.Wallet;
+    AccountType accountType =
+        account["accountType"] == AccountType.Client.toString()
+            ? AccountType.Client
+            : AccountType.Wallet;
 
     if (accountType == AccountType.Client) {
       ClientAccount clientAccount = ClientAccount(
@@ -126,7 +129,8 @@ Future<void> loadState(TokenTrackers tokensTracker, WidgetRef ref) async {
 
   // Select the first account
   if (accountsState.values.isNotEmpty) {
-    ref.read(selectedAccountProvider.notifier).state = accountsState.values.first;
+    ref.read(selectedAccountProvider.notifier).state =
+        accountsState.values.first;
   }
 
   // Mark the app as loaded
@@ -229,7 +233,8 @@ class AccountsManager extends StateNotifier<Map<String, Account>> {
     if (state.containsKey(accountName)) throw AccountAlreadyExists();
 
     // Create the account
-    WalletAccount walletAccount = await WalletAccount.generate(accountName, url, tokensTracker);
+    WalletAccount walletAccount =
+        await WalletAccount.generate(accountName, url, tokensTracker);
 
     // Add the account
     state[walletAccount.name] = walletAccount;
@@ -253,9 +258,11 @@ class AccountsManager extends StateNotifier<Map<String, Account>> {
   /*
    * Import a wallet
    */
-  Future<WalletAccount> importWallet(String mnemonic, NetworkUrl url, String accountName) async {
+  Future<WalletAccount> importWallet(
+      String mnemonic, NetworkUrl url, String accountName) async {
     // Create the account
-    WalletAccount walletAccount = WalletAccount(0, accountName, url, mnemonic, tokensTracker);
+    WalletAccount walletAccount =
+        WalletAccount(0, accountName, url, mnemonic, tokensTracker);
 
     // Create key pair
     await walletAccount.loadKeyPair();
@@ -297,7 +304,8 @@ class AccountsManager extends StateNotifier<Map<String, Account>> {
   /*
    * Create an address watcher
    */
-  Future<ClientAccount> createWatcher(String address, NetworkUrl url, String accountName) async {
+  Future<ClientAccount> createWatcher(
+      String address, NetworkUrl url, String accountName) async {
     ClientAccount account = ClientAccount(
       address,
       0,

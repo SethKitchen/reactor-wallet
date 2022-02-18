@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:solana/dto.dart';
 import 'package:solana/solana.dart';
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
 import 'package:solana/metaplex.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -111,12 +111,14 @@ class BaseAccount {
    * Refresh the account balance
    */
   Future<void> refreshBalance() async {
-    int balance = await client.rpcClient.getBalance(address, commitment: Commitment.confirmed);
+    int balance = await client.rpcClient
+        .getBalance(address, commitment: Commitment.confirmed);
 
     this.balance = balance.toDouble() / lamportsPerSol;
     itemsLoaded[AccountItem.solBalance] = true;
 
-    usdBalance = this.balance * tokensTracker.getTokenValue(SystemProgram.programId);
+    usdBalance =
+        this.balance * tokensTracker.getTokenValue(SystemProgram.programId);
 
     itemsLoaded[AccountItem.usdBalance] = true;
 
@@ -158,7 +160,8 @@ class BaseAccount {
 
     tokenAccounts.asMap().forEach(
       (index, tokenAccount) {
-        ParsedAccountData? data = tokenAccount.account.data as ParsedAccountData?;
+        ParsedAccountData? data =
+            tokenAccount.account.data as ParsedAccountData?;
 
         if (data != null) {
           data.when(
@@ -187,16 +190,20 @@ class BaseAccount {
                     client.rpcClient.getMetadata(mint: tokenMint).then(
                       (value) async {
                         try {
-                          ImageInfo imageInfo = await getImageFromUri(value!.uri) as ImageInfo;
+                          ImageInfo imageInfo =
+                              await getImageFromUri(value!.uri) as ImageInfo;
                           if (balance > 0) {
-                            tokens[tokenMint] = NFT(balance, tokenMint, tokenInfo, imageInfo);
+                            tokens[tokenMint] =
+                                NFT(balance, tokenMint, tokenInfo, imageInfo);
                           } else {
                             notOwnedNFTs++;
                           }
                         } catch (_) {
-                          tokens[tokenMint] = Token(balance, tokenMint, tokenInfo);
+                          tokens[tokenMint] =
+                              Token(balance, tokenMint, tokenInfo);
                         } finally {
-                          if (tokens.length + notOwnedNFTs == tokenAccounts.length) {
+                          if (tokens.length + notOwnedNFTs ==
+                              tokenAccounts.length) {
                             itemsLoaded[AccountItem.tokens] = true;
                             try {
                               completer.complete();
@@ -247,7 +254,8 @@ class BaseAccount {
                   transfer: (data) {
                     ParsedSystemTransferInformation transfer = data.info;
                     bool receivedOrNot = transfer.destination == address;
-                    double ammount = transfer.lamports.toDouble() / lamportsPerSol;
+                    double ammount =
+                        transfer.lamports.toDouble() / lamportsPerSol;
 
                     transactions.add(
                       TransactionDetails(

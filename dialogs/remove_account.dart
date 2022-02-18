@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
 
 Future<void> removeAccountDialog(BuildContext context, Account account) async {
   return showDialog<void>(
@@ -51,6 +51,7 @@ void removeAccount(WidgetRef ref, BuildContext context, Account account) {
   if (accountsProv.state.isEmpty) {
     ref.read(selectedAccountProvider.notifier).state = null;
   } else {
-    ref.read(selectedAccountProvider.notifier).state = accountsProv.state.values.first;
+    ref.read(selectedAccountProvider.notifier).state =
+        accountsProv.state.values.first;
   }
 }

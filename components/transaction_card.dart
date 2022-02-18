@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reactor_wallet/components/accounts_transaction.dart';
-import 'package:reactor_wallet/components/clickable_card.dart';
-import 'package:reactor_wallet/dialogs/transaction_info.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/components/accounts_transaction.dart';
+import 'package:sethkitchen/wallet/components/clickable_card.dart';
+import 'package:sethkitchen/wallet/dialogs/transaction_info.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
 
 class TransactionCard extends StatelessWidget {
   final TransactionDetails transaction;
@@ -13,10 +13,12 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool toMe = transaction.receivedOrNot;
-    String shortAddress =
-        toMe ? transaction.origin.substring(0, 5) : transaction.destination.substring(0, 5);
+    String shortAddress = toMe
+        ? transaction.origin.substring(0, 5)
+        : transaction.destination.substring(0, 5);
 
-    DateTime date = DateTime.fromMillisecondsSinceEpoch(transaction.blockTime * 1000);
+    DateTime date =
+        DateTime.fromMillisecondsSinceEpoch(transaction.blockTime * 1000);
     String readableDate = hourMinutFormatter.format(date);
 
     String transactionAmount = transaction.ammount.toString().contains("-")
@@ -41,7 +43,9 @@ class TransactionCard extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(
-                    toMe ? Icons.call_received_outlined : Icons.call_made_outlined,
+                    toMe
+                        ? Icons.call_received_outlined
+                        : Icons.call_made_outlined,
                     color: Theme.of(context).iconColor,
                   ),
                   Padding(

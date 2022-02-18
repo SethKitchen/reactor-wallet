@@ -11,8 +11,8 @@ import 'package:solana/solana.dart'
         Wallet,
         lamportsPerSol,
         signTransaction;
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
 import 'package:worker_manager/worker_manager.dart';
 import 'package:bip39/bip39.dart' as bip39;
 import 'base_account.dart';
@@ -21,7 +21,8 @@ import 'package:encrypt/encrypt.dart';
 // Master key to encrypt and decrypt mnemonics, aka passphrases, this is included when creating the build
 final secureKey = Key.fromUtf8(
   // ignore: prefer_const_constructors
-  String.fromEnvironment("secureKey", defaultValue: "IthinkRustIsBetterLanguageThanJS"),
+  String.fromEnvironment("secureKey",
+      defaultValue: "IthinkRustIsBetterLanguageThanJS"),
 );
 final iv = IV.fromLength(16);
 
@@ -91,7 +92,8 @@ class WalletAccount extends BaseAccount implements Account {
       instructions: [instruction],
     );
 
-    final signature = await client.rpcClient.signAndSendTransaction(message, [wallet]);
+    final signature =
+        await client.rpcClient.signAndSendTransaction(message, [wallet]);
 
     return signature;
   }
@@ -132,7 +134,8 @@ class WalletAccount extends BaseAccount implements Account {
       );
     }
 
-    final signature = await client.rpcClient.signAndSendTransaction(message, [wallet]);
+    final signature =
+        await client.rpcClient.signAndSendTransaction(message, [wallet]);
 
     return signature;
   }
@@ -167,7 +170,8 @@ class WalletAccount extends BaseAccount implements Account {
    * Create the keys pair in Isolate to prevent blocking the main thread
    */
   static Future<Ed25519HDKeyPair> createKeyPair(String mnemonic) async {
-    final Ed25519HDKeyPair keyPair = await Ed25519HDKeyPair.fromMnemonic(mnemonic);
+    final Ed25519HDKeyPair keyPair =
+        await Ed25519HDKeyPair.fromMnemonic(mnemonic);
     return keyPair;
   }
 
@@ -186,7 +190,8 @@ class WalletAccount extends BaseAccount implements Account {
   /*
    * Create a WalletAccount with a random mnemonic
    */
-  static Future<WalletAccount> generate(String name, NetworkUrl url, tokensTracker) async {
+  static Future<WalletAccount> generate(
+      String name, NetworkUrl url, tokensTracker) async {
     final String randomMnemonic = bip39.generateMnemonic();
 
     WalletAccount account = WalletAccount(

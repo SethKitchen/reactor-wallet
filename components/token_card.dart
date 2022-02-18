@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/components/wrapper_image.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/components/wrapper_image.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
 
 class TokenCard extends ConsumerWidget {
   final Token token;
@@ -51,7 +51,9 @@ class TokenCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Padding(padding: const EdgeInsets.only(right: 10), child: Text('\$$usdBalance'))
+                    Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Text('\$$usdBalance'))
                   ],
                 ),
               ),

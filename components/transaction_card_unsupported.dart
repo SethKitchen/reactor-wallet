@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:reactor_wallet/components/accounts_transaction.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/components/accounts_transaction.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
 
 class UnsupportedTransactionCard extends StatelessWidget {
   final TransactionDetails transaction;
 
-  const UnsupportedTransactionCard(this.transaction, {Key? key}) : super(key: key);
+  const UnsupportedTransactionCard(this.transaction, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DateTime date = DateTime.fromMillisecondsSinceEpoch(transaction.blockTime * 1000);
+    DateTime date =
+        DateTime.fromMillisecondsSinceEpoch(transaction.blockTime * 1000);
     String readableDate = hourMinutFormatter.format(date);
 
     return Flex(

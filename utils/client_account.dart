@@ -1,7 +1,7 @@
-import 'package:reactor_wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
 import 'package:solana/solana.dart' show SolanaClient;
-import 'package:reactor_wallet/components/network_selector.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/components/network_selector.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
 
 /*
  * Address Client to watch over an specific address

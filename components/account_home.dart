@@ -2,13 +2,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/dialogs/create_qr_payment.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/components/token_card.dart';
+import 'package:sethkitchen/wallet/components/token_card_shimmer.dart';
+import 'package:sethkitchen/wallet/dialogs/create_qr_payment.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:reactor_wallet/components/token_card.dart';
-import 'package:reactor_wallet/components/token_card_shimmer.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
 
 String balanceShorter(String balance) {
   if (balance.length >= 6) {
@@ -107,7 +107,8 @@ class SolBalance extends StatelessWidget {
   final String solBalance;
   final bool isReady;
 
-  const SolBalance({Key? key, required this.solBalance, required this.isReady}) : super(key: key);
+  const SolBalance({Key? key, required this.solBalance, required this.isReady})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +156,8 @@ class USDBalance extends StatelessWidget {
   final String usdBalance;
   final bool isReady;
 
-  const USDBalance({Key? key, required this.usdBalance, required this.isReady}) : super(key: key);
+  const USDBalance({Key? key, required this.usdBalance, required this.isReady})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +207,8 @@ class ReceiveButton extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: OutlinedButton(
-              style: const ButtonStyle(visualDensity: VisualDensity.comfortable),
+              style:
+                  const ButtonStyle(visualDensity: VisualDensity.comfortable),
               onPressed: () {
                 Clipboard.setData(
                   ClipboardData(text: account.address),
@@ -238,7 +241,8 @@ class ReceiveButton extends StatelessWidget {
                 ),
                 Padding(
                     padding: const EdgeInsets.only(left: 5),
-                    child: Icon(Icons.qr_code_2_outlined, color: Theme.of(context).iconColor)),
+                    child: Icon(Icons.qr_code_2_outlined,
+                        color: Theme.of(context).iconColor)),
               ],
             ),
           ),
@@ -309,7 +313,8 @@ class AccountInfo extends ConsumerWidget {
             return true;
           },
           child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics()),
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -326,16 +331,17 @@ class AccountInfo extends ConsumerWidget {
                             padding: const EdgeInsets.only(left: 25, top: 15),
                             child: USDBalance(
                               usdBalance: usdBalance,
-                              isReady:
-                                  account.isLoaded && account.isItemLoaded(AccountItem.usdBalance),
+                              isReady: account.isLoaded &&
+                                  account.isItemLoaded(AccountItem.usdBalance),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 25, bottom: 20, top: 15),
+                            padding: const EdgeInsets.only(
+                                left: 25, bottom: 20, top: 15),
                             child: SolBalance(
                               solBalance: solBalance,
-                              isReady:
-                                  account.isLoaded && account.isItemLoaded(AccountItem.solBalance),
+                              isReady: account.isLoaded &&
+                                  account.isItemLoaded(AccountItem.solBalance),
                             ),
                           ),
                         ],

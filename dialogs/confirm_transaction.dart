@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/dialogs/insufficient_funds.dart';
-import 'package:reactor_wallet/dialogs/transaction_error.dart';
-import 'package:reactor_wallet/dialogs/transaction_sent.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
-import 'package:reactor_wallet/utils/theme.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
+import 'package:sethkitchen/wallet/dialogs/insufficient_funds.dart';
+import 'package:sethkitchen/wallet/dialogs/transaction_error.dart';
+import 'package:sethkitchen/wallet/dialogs/transaction_sent.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/utils/wallet_account.dart';
 
 /*
  * Ask the user to confirm the transactio
@@ -49,7 +49,8 @@ Future<void> confirmTransactionDialog(
           final hasEnoughFunds = useState(false);
 
           TextStyle? fadedTextStyle = TextStyle(
-            color: hasEnoughFunds.value ? null : Theme.of(context).fadedTextColor,
+            color:
+                hasEnoughFunds.value ? null : Theme.of(context).fadedTextColor,
           );
 
           useEffect(() {
@@ -95,7 +96,8 @@ Future<void> confirmTransactionDialog(
                         ? null
                         : CircularProgressIndicator(
                             strokeWidth: 3.0,
-                            semanticsLabel: "Loading ${transaction.token.info.symbol} balance",
+                            semanticsLabel:
+                                "Loading ${transaction.token.info.symbol} balance",
                           ),
                   ),
                   ListTile(

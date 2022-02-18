@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
-import 'package:reactor_wallet/utils/tracker.dart';
-import 'package:reactor_wallet/utils/wallet_account.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/utils/wallet_account.dart';
 import 'package:solana/dto.dart' show Commitment;
 
 Future<void> transactionIsBeingConfirmedDialog(
@@ -31,7 +31,9 @@ Future<void> transactionIsBeingConfirmedDialog(
                     return HookConsumer(
                       builder: (ctx, ref, _) {
                         // Refresh the account when the transaction has been confirmed
-                        ref.read(accountsProvider.notifier).refreshAccount(walletAccount.name);
+                        ref
+                            .read(accountsProvider.notifier)
+                            .refreshAccount(walletAccount.name);
 
                         return ListBody(
                           children: <Widget>[

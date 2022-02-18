@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reactor_wallet/components/size_wrapper.dart';
+import 'package:sethkitchen/wallet/components/size_wrapper.dart';
 
 /*
  * Account Selection Page

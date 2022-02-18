@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:reactor_wallet/components/transaction_card.dart';
-import 'package:reactor_wallet/components/transaction_card_shimmer.dart';
-import 'package:reactor_wallet/components/transaction_card_unsupported.dart';
-import 'package:reactor_wallet/utils/base_account.dart';
-import 'package:reactor_wallet/utils/states.dart';
-import 'package:reactor_wallet/utils/theme.dart';
+import 'package:sethkitchen/wallet/components/transaction_card.dart';
+import 'package:sethkitchen/wallet/components/transaction_card_shimmer.dart';
+import 'package:sethkitchen/wallet/components/transaction_card_unsupported.dart';
+import 'package:sethkitchen/wallet/utils/base_account.dart';
+import 'package:sethkitchen/wallet/utils/states.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
 
 DateFormat hourMinutFormatter = DateFormat.Hm();
 DateFormat dayFormatter = DateFormat.yMMMMEEEEd();
@@ -37,7 +37,8 @@ List getAllBlockNumbers(List<TransactionDetails> txs) {
 class AccountTransactions extends HookConsumerWidget {
   final Account account;
 
-  const AccountTransactions({Key? key, required this.account}) : super(key: key);
+  const AccountTransactions({Key? key, required this.account})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -85,7 +86,8 @@ class AccountTransactions extends HookConsumerWidget {
                         padding: const EdgeInsets.all(7),
                         child: Text(
                           blockTime,
-                          style: TextStyle(color: Theme.of(context).fadedTextColor),
+                          style: TextStyle(
+                              color: Theme.of(context).fadedTextColor),
                         ),
                       );
                     }
