@@ -7,7 +7,7 @@ import 'package:sethkitchen/wallet/components/token_card_shimmer.dart';
 import 'package:sethkitchen/wallet/dialogs/create_qr_payment.dart';
 import 'package:sethkitchen/wallet/utils/base_account.dart';
 import 'package:sethkitchen/wallet/utils/states.dart';
-import 'package:sethkitchen/wallet/utils/tracker.dart';
+import 'package:sethkitchen/wallet/utils/theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 String balanceShorter(String balance) {

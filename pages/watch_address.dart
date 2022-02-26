@@ -46,7 +46,7 @@ class WatchAddressState extends ConsumerState<WatchAddress> {
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: Text(
-                          "Think a name, don't worry, you can change it later."),
+                          "Think of an easy name to associate this address with, don't worry, you can change it later."),
                     ),
                     TextFormField(
                       initialValue: accountName,

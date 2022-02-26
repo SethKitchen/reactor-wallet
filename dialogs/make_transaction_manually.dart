@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sethkitchen/wallet/dialogs/confirm_transaction.dart';
 import 'package:sethkitchen/wallet/utils/base_account.dart';
 import 'package:sethkitchen/wallet/utils/wallet_account.dart';
-import 'package:solana/solana.dart';
 
 String? transactionAddressValidator(String? value) {
   if (value == null || value.isEmpty) {

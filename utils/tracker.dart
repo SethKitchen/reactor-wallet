@@ -62,11 +62,11 @@ class TokenTrackers {
   late Map<String, TokenInfo> tokensList = {};
 
   Future<void> loadTokenList() async {
-    var tokensFile = await rootBundle.loadString('assets/tokens_list.json');
+    var tokensFile = await rootBundle.loadString('tokens_list.json');
     Map tokensList = json.decode(tokensFile);
     for (final token in tokensList["tokens"]) {
-      this.tokensList[token['address']] = TokenInfo.withInfo(
-          token["address"], token["name"], token["logoURI"], token["symbol"], token["decimals"]);
+      this.tokensList[token['address']] = TokenInfo.withInfo(token["address"],
+          token["name"], token["logoURI"], token["symbol"], token["decimals"]);
     }
   }
 
@@ -97,12 +97,14 @@ class TokenTrackers {
     return null;
   }
 
-  TokenInfo addTrackerByProgramMint(String programMint, {required TokenInfo defaultValue}) {
+  TokenInfo addTrackerByProgramMint(String programMint,
+      {required TokenInfo defaultValue}) {
     TokenInfo tokenInfo = getTokenInfo(programMint) ?? defaultValue;
 
     // Add tracker if doesn't exist yet
     if (!trackers.containsKey(programMint)) {
-      trackers[programMint] = Tracker(tokenInfo.name, programMint, tokenInfo.symbol);
+      trackers[programMint] =
+          Tracker(tokenInfo.name, programMint, tokenInfo.symbol);
     }
 
     return tokenInfo;

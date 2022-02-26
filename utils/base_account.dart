@@ -162,7 +162,6 @@ class BaseAccount {
       (index, tokenAccount) {
         ParsedAccountData? data =
             tokenAccount.account.data as ParsedAccountData?;
-
         if (data != null) {
           data.when(
             splToken: (data) {
