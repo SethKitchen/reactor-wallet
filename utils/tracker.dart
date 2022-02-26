@@ -120,7 +120,7 @@ Future<Map<String, double>> getTokenUsdValue(List<String> tokens) async {
     headers['Accept'] = 'application/json';
     headers['Access-Control-Allow-Origin'] = '*';
     http.Response response = await http.get(
-      Uri.http(
+      Uri.https(
         'api.coingecko.com',
         '/api/v3/simple/price',
         {
